@@ -13,5 +13,12 @@ class Survivor < ApplicationRecord
   #   }
   # end
 
-
+  def as_json(options={})
+    c = super(except: [:gender_id, :created_at, :updated_at], include: [:location])
+    c[:birthday] = (self.birthday.to_time.iso8601 unless self.birthday.blank?)
+    c[:gender] = (I18n.t(self.gender.description))
+    # c[:latitude] = self.location.latitude
+    # c[:longitude] = self.location.longitude
+    c
+  end
 end
