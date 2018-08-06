@@ -1,8 +1,10 @@
 class Survivor < ApplicationRecord
   belongs_to :gender #,optional: true
   has_one :location
+  has_one :report_survivor
 
   accepts_nested_attributes_for :location#, update_only: true #caso deseje não exibir o histórico de localização, descomente essa linha
+  accepts_nested_attributes_for :report_survivor#, update_only: true #caso deseje não exibir o histórico de localização, descomente essa linha
 
 
   # def to_br
@@ -14,7 +16,11 @@ class Survivor < ApplicationRecord
   # end
 
   def as_json(options={})
-    c = super(except: [:gender_id, :created_at, :updated_at], include: [:location])
+    c = super(except: [:created_at, :updated_at],
+              include: {location: {except: [:id,:created_at, :updated_at]},
+                        report_survivor: {except: [:id, :created_at, :updated_at]}
+                       }
+              )
     c[:birthday] = (self.birthday.to_time.iso8601 unless self.birthday.blank?)
     c[:gender] = (I18n.t(self.gender.description))
     # c[:latitude] = self.location.latitude

@@ -26,18 +26,27 @@ namespace :dev do
           Survivor.create!(
             name: Faker::Name.name,
             gender: Gender.all.sample,
-            birthday: Faker::Date.between(70.years.ago, 10.years.ago),
-            has_abd: false,
-            abd_report: 0
+            birthday: Faker::Date.between(70.years.ago, 10.years.ago)
           )
           puts "#{s} of #{total_survivors} found"
       end
+      puts "Done!"
 
       puts "Searching for location of survivors..."
       Survivor.all.each do |survivor|
         Location.create!(
           latitude: Faker::Address.latitude,
           longitude: Faker::Address.longitude,
+          survivor: survivor
+        )
+      end
+      puts "Done!"
+
+      puts "Making report of survivors..."
+      Survivor.all.each do |survivor|
+        ReportSurvivor.create!(
+          has_abd: false,
+          abd_report: 0,
           survivor: survivor
         )
       end

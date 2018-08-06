@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :report_survivors
   resources :genders
   resources :survivors do
     resource :gender, only: [:show]

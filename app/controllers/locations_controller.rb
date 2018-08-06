@@ -1,44 +1,43 @@
   class LocationsController < ApplicationController
-    before_action :set_contact
+    before_action :set_location
 
-    # DELETE /contacts/1/address
+    # DELETE /survivors/1/location
     def destroy
-      @contact.address.destroy
+      @survivor.location.destroy
     end
 
-    # POST /contacts/1/address
+    # POST /survivors/1/location
     def create
-      @contact.address = Address.new(address_params)
+      @survivor.location = Location.new(location_params)
 
-      if @contact.save
-        render json: @contact.address, status: :created, location: contact_address_url(@contact)
+      if @survivor.save
+        render json: @survivor.location, status: :created, location: survivor_location_url(@survivor)
       else
-        render json: @contact.errors, status: :unprocessable_entity
+        render json: @survivor.errors, status: :unprocessable_entity
       end
     end
 
-    # PATCH /contacts/1/address
+    # PATCH /survivors/1/location
     def update
-      if @contact.address.update(address_params)
-        render json: @contact.address
+      if @survivor.location.update(location_params)
+        render json: @survivor.location
       else
-        render json: @contact.errors, status: :unprocessable_entity
+        render json: @survivor.errors, status: :unprocessable_entity
       end
     end
 
-    # GET /contacts/1/address
+    # GET /survivors/1/location
     def show
-      render json: @contact.address
+      render json: @survivor.location
     end
 
     private
       # Use callbacks to share common setup or constraints between actions.
-      def set_contact
-        @contact = Contact.find(params[:contact_id])
+      def set_location
+        @survivor = Survivor.find(params[:survivor_id])
       end
 
-      def address_params
-        ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+      def location_params
+        params.require(:survivor).permit(:id)
       end
   end
-end
