@@ -17,9 +17,23 @@ class ReportSurvivorsController < ApplicationController
     render json: @report_survivors
   end
 
+  # GET /report_survivors
+  def id
+    @survivor = Survivor.find(params[:survivor_id]).report_survivor
+    if params[:survivor_id]
+      @survivor[:abd_report] == 3 ?  @survivor[:has_abd] = true : @survivor[:abd_report] += 1
+      @survivor.save
+    end
+    render json: @survivor
+  end
+
   # GET /report_survivors/1
   def show
-    render json: @report_survivor
+    if params[:survivor_id]
+      render json: @survivor.report_survivor
+    else
+      render json: @report_survivor
+    end
   end
 
   # POST /report_survivors
@@ -36,6 +50,10 @@ class ReportSurvivorsController < ApplicationController
   # PATCH/PUT /report_survivors/1
   def update
     if @report_survivor.update(report_survivor_params)
+      if @report_survivor[:abd_report] == 3
+        @report_survivor[:has_abd] = true
+        @report_survivor.save
+      end
       render json: @report_survivor
     else
       render json: @report_survivor.errors, status: :unprocessable_entity
@@ -50,17 +68,15 @@ class ReportSurvivorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_report_survivor
-      # @report_survivor = ReportSurvivor.find(params[:id])
-      #
-      # if params[:survivor_id]
-      #   @report_survivor = Survivor.find(params[:survivor_id]).gender
-      #   return @report_survivor
-      # end
-      @report_survivor = ReportSurvivor.find(params[:survivor_id])
+      if params[:survivor_id]
+        @survivor = Survivor.find(params[:survivor_id])
+        return @survivor
+      end
+      @report_survivor = ReportSurvivor.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def report_survivor_params
-      params.require(:report_survivor).permit(:id, :has_abd, :abd_report)
+      params.require(:report_survivor).permit(:abd_report)
     end
 end
