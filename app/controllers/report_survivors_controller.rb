@@ -50,11 +50,17 @@ class ReportSurvivorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_report_survivor
-      @report_survivor = ReportSurvivor.find(params[:id])
+      # @report_survivor = ReportSurvivor.find(params[:id])
+      #
+      # if params[:survivor_id]
+      #   @report_survivor = Survivor.find(params[:survivor_id]).gender
+      #   return @report_survivor
+      # end
+      @report_survivor = ReportSurvivor.find(params[:survivor_id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def report_survivor_params
-      params.fetch(:report_survivor, {})
+      params.require(:report_survivor).permit(:id, :has_abd, :abd_report)
     end
 end
