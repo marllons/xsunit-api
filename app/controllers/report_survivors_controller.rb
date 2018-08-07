@@ -15,12 +15,12 @@ class ReportSurvivorsController < ApplicationController
     h = {"total_survivors" => "#{count_report.to_i}",
          "abd"=> "#{abd.to_i}", "not-abd"=> "#{not_abd.to_i}",
          "%_abd" => "#{(abd/count_report)*100.0}%",
-         "%_not_abd" => "#{(not_abd/count_report)*100}%"}     
+         "%_not_abd" => "#{(not_abd/count_report)*100}%"}
     render json: @report_survivors << h
   end
 
   # GET /report_survivors
-  def id
+  def report
     @survivor = Survivor.find(params[:survivor_id]).report_survivor
     if params[:survivor_id]
       @survivor[:abd_report] == 3 ?  @survivor[:has_abd] = true : @survivor[:abd_report] += 1

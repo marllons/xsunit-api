@@ -12,7 +12,8 @@ Rails.application.routes.draw do
 
     resource :report_survivor, only: [:show, :update] do
       member do
-        get :id
+        get ':id', to: 'report_survivors#report'
+        # get :id
       end
     end
 
