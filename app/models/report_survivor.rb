@@ -9,10 +9,6 @@ class ReportSurvivor < ApplicationRecord
     c[:birthday] = (self.survivor.birthday.to_time.iso8601 unless self.survivor.birthday.blank?)
     c
   end
-  #
-  # def update(attributes)
-  #   if attributes.
-  # end
 end
 
 

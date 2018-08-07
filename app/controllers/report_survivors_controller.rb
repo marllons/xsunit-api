@@ -5,16 +5,18 @@ class ReportSurvivorsController < ApplicationController
   def index
     @report_survivors = ReportSurvivor.all.as_json.sort_by{ |k| k[:name] }
     # puts @report_survivors
-    count_report = @report_survivors.size
-    not_abd = 0
-    abd = 0
+    count_report = @report_survivors.size.to_f
+    not_abd = 0.0
+    abd = 0.0
     @report_survivors.each do |report|
-        not_abd += 1 unless report["has_abd"] == true
-        abd += 1 unless report["has_abd"] == false
+        not_abd += 1.0 unless report["has_abd"] == true
+        abd += 1.0 unless report["has_abd"] == false
     end
-    puts not_abd
-    puts abd
-    render json: @report_survivors
+    h = {"total_survivors" => "#{count_report.to_i}",
+         "abd"=> "#{abd.to_i}", "not-abd"=> "#{not_abd.to_i}",
+         "%_abd" => "#{(abd/count_report)*100.0}%",
+         "%_not_abd" => "#{(not_abd/count_report)*100}%"}     
+    render json: @report_survivors << h
   end
 
   # GET /report_survivors
