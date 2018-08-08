@@ -1,6 +1,6 @@
 # X-SUNIT (Extraterrestrial Survival Unit) API
 
-I was developed a REST API, which will store information about the survivors.
+I've developed a REST API, which stores information about survivors.
 
 ## The API contains:
 
