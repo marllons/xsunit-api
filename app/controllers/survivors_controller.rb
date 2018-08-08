@@ -16,7 +16,7 @@ class SurvivorsController < ApplicationController
     render json: @survivor
   end
 
-  api :POST, '/survivors', 'If you find a survivor, register a survivor of xSunit!'
+  api :POST, '/survivors', 'If you find a survivor, register your dara and location to survivor of xSunit!'
   param_group :survivors_post, Api::SurvivorsApi
   # POST /survivors
   def create

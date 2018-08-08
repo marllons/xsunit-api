@@ -1,29 +1,23 @@
   module Api
-   class LocationsApi <LocationsController
+    class LocationsApi < LocationsController
       def_param_group :locations_get do
-        param :session, String, :desc => "user is logged in", :required => true
-        param :regexp_param, /^[0-9]* years/, :desc => "regexp param"
-        param :array_param, [100, "one", "two", 1, 2], :desc => "array validator"
-        param :boolean_param, [true, false], :desc => "array validator with boolean"
-        param :proc_param, lambda { |val|
-          val == "param value" ? true : "The only good value is 'param value'."
-        }, :desc => "proc validator"
-        param :param_with_metadata, String, :desc => "", :meta => [:your, :custom, :metadata]
-        error :code => 401, :desc => "Unauthorized"
-        error :code => 404, :desc => "Not Found", :meta => {:anything => "you can think of"}
+        param :latitude, String, "Latitude where it is located"
+        param :longitude, String, "Longitude where it is located"
+        param :surviror_id, String, "Id of survivor"
+        error :code => 500, :desc => "Internal Server Error"
+        error :code => 404, :desc => "Not Found"
         returns :code => 200, :desc => "a successful response" do
-           property :value1, String, :desc => "A string value"
-           property :value2, Integer, :desc => "An integer value"
-           property :value3, Hash, :desc => "An object" do
-             property :enum1, ['v1', 'v2'], :desc => "One of 2 possible string values"
-           end
-         end
-        description "method description"
-        formats ['json', 'jsonp', 'xml']
-        meta :message => "Some very important info"
-        example " 'user': {...} "
+          property :value1, String, :desc => "A string value"
+          property :value2, Integer, :desc => "An integer value"
+        end
+        description "Returns all survivors with their respective locations"
+        formats ['json']
+        example "{
+        'latitude': '6.638267602504783',
+        'longitude': '64.70043818500704'
+        }"
         see "report_survivors#index", "Survivor Reports"
-        see "genders#index", "Gender of Survivors"
+        see "survivors#index", "Survivors"
         #see :link => "report_survivors#index", :desc => "Location"
       end
     end

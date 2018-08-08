@@ -19,5 +19,26 @@ module Api
       see "survivors#index", "Survivors"
       #see :link => "report_survivors#index", :desc => "Location"
     end
+
+    def_param_group :genders_post do
+      param :description, String, :desc => "Description of gender"
+      error :code => 500, :desc => "Internal Server Error"
+      error :code => 404, :desc => "Not Found"#
+      error :code => 200, :desc => "A successful response. Returns:", :meta =>
+      {
+        :id => "id",
+        :description => "description",
+        :created_at => "created_at",
+        :updated_at => "updated_at"
+      }
+      description "Save a new gender of survivors"
+      formats ['json']
+      example "{
+      'description': 'Male'
+}"
+      see "report_survivors#index", "Survivor Reports"
+      see "survivors#index", "Survivors"
+      #see :link => "report_survivors#index", :desc => "Location"
+    end
   end
 end

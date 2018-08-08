@@ -26,7 +26,7 @@
       end
     end
 
-    api :GET, '/locations', 'Get all location of Survivors'
+    api :GET, 'survivors/:id/location', 'Get all location of Survivors'
     param_group :locations_get, Api::LocationsApi
 
     # GET /survivors/1/location

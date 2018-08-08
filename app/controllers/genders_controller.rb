@@ -3,19 +3,23 @@ class GendersController < ApplicationController
 
   api :GET, '/genders', 'Get all genders of Survivors'
   param_group :genders_get, Api::GendersApi
-  
   # GET /genders
   def index
     @genders = Gender.all
-
     render json: @genders
   end
 
+  api :GET, '/genders/:id', 'Get a gender'
+  api :GET, '/survivors/:id/gender', 'Get a gender of a survivor'
+  
+  param_group :genders_get, Api::GendersApi
   # GET /genders/1
   def show
     render json: @gender
   end
 
+  api :POST, '/genders', 'Save a new gender'
+  param_group :genders_post, Api::GendersApi
   # POST /genders
   def create
     @gender = Gender.new(gender_params)
@@ -27,6 +31,8 @@ class GendersController < ApplicationController
     end
   end
 
+  api :PATCH, '/genders/:id', 'Edit a gender of Survivors'
+  param_group :genders_post, Api::GendersApi
   # PATCH/PUT /genders/1
   def update
     if @gender.update(gender_params)

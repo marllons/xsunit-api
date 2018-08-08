@@ -1,20 +1,13 @@
 Rails.application.routes.draw do
   apipie
-  resources :report_survivors
+  resources :report_survivors, only: [:show, :index, :update]
   resources :genders
   resources :survivors do
     resource :gender, only: [:show]
-    resource :gender, only: [:show], path: 'relationships/gender'
-
     resource :location, only: [:show]
-    resource :location, only: [:show], path: 'relationships/location'
-
-    resource :report_survivor, only: [:show, :update]
-
-    resource :report_survivor, only: [:show, :update] do
+    resource :report_survivor, only: [:show] do
       member do
         get ':id', to: 'report_survivors#report'
-        # get :id
       end
     end
 
