@@ -48,3 +48,6 @@ gem 'faker'
 
 #Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff http://rails-i18n.org
 gem 'rails-i18n', '~> 5.1' # For 5.0.x, 5.1.x and 5.2.x
+
+#Ruby on Rails API documentation tool
+gem 'apipie-rails'

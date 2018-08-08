@@ -26,6 +26,9 @@
       end
     end
 
+    api :GET, '/locations', 'Get all location of Survivors'
+    param_group :locations_get, Api::LocationsApi
+
     # GET /survivors/1/location
     def show
       render json: @survivor.location

@@ -1,6 +1,10 @@
 class ReportSurvivorsController < ApplicationController
   before_action :set_report_survivor, only: [:show, :update, :destroy]
 
+
+  api :GET, '/report_survivors', 'Get report data from Survivors abducted or not abducted'
+  param_group :report_survivor_get, Api::ReportSurvivorsApi
+
   # GET /report_survivors
   def index
     @report_survivors = ReportSurvivor.all.as_json.sort_by{ |k| k[:name] }

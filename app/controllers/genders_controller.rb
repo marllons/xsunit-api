@@ -1,6 +1,9 @@
 class GendersController < ApplicationController
   before_action :set_gender, only: [:show, :update, :destroy]
 
+  api :GET, '/genders', 'Get all genders of Survivors'
+  param_group :genders_get, Api::GendersApi
+  
   # GET /genders
   def index
     @genders = Gender.all
