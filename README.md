@@ -2,7 +2,7 @@
 
 I was developed a REST API, which will store information about the survivors.
 
-##The API contains:
+## The API contains:
 
 With this API you can:
 * **Add survivors to the database**
@@ -22,17 +22,17 @@ Percentage of abducted survivors.
 Percentage of survivors not abducted.
 List all names of survivors in alphabetical order with an identification to know if they were abducted or not.
 
-##API Documentation
+## API Documentation
 **Check out the api documentation to find out how it works on the route**
-'''
+```
 http://localhost:3000/apipie
-'''
+```
 
-##Usage
+## Usage
 After install ruby, rails and up the server, clone this project and execute:
-'''
+```
 rails dev:init
-'''
+```
 To execute the initial seed.
 
 
